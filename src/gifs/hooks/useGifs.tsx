@@ -8,11 +8,15 @@ export const useGifs = () => {
   const [gifs, setGifs] = useState<Gif[]>([])
   const gifsCache = useRef<Record<string, Gif[]>>({})
 
-  const handlePreviousSearchesChange = (search: string) => {
+  const handlePreviousSearchesChange = async (search: string) => {
     if (gifsCache.current[search]) {
       setGifs(gifsCache.current[search])
       return
     }
+    setPreviousSearches((prev) => [search, ...prev.splice(0, 7)])
+    const gifs = await getGifsByQuery(search)
+    setGifs(gifs)
+    gifsCache.current[search] = gifs
   }
   const handleSearchChange = async (query: string) => {
     const queryClean = query.trim().toLocaleLowerCase()

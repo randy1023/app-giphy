@@ -46,7 +46,6 @@ describe('MyCounterApp', () => {
     expect(incrementMock).toHaveBeenCalledTimes(1)
     expect(decrementMock).not.toHaveBeenCalled()
     expect(resetMock).not.toHaveBeenCalled()
-    screen.debug()
   })
   // test('should decrement the counter', () => {
   //   render(<MyCounterApp />)
